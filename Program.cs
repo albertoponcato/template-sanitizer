@@ -2,10 +2,8 @@
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
-Console.WriteLine("Insert template folder path and press enter");
+Console.WriteLine("enter the path of the template to be sanitized and press enter");
 var path = Console.ReadLine();
-
-Console.WriteLine("Okkkk let's go");
 
 if (!Directory.Exists(path))
     return;
@@ -25,7 +23,8 @@ foreach (var file in files)
 
     if (file.EndsWith("index.html"))
     {
-        var nodes = htmlDoc.DocumentNode.SelectNodes("//a")
+        var nodes = htmlDoc.DocumentNode
+            .SelectNodes("//a")
             .Where(a => a.GetAttributeValue("href", string.Empty).StartsWith("/") && a.GetAttributeValue("href", string.Empty).EndsWith(".html"));
 
         foreach (var node in nodes)
@@ -41,7 +40,7 @@ foreach (var file in files)
 }
 
 Console.WriteLine(path);
-Console.WriteLine("End");
+Console.WriteLine("ok, i'm done");
 
 try
 {
